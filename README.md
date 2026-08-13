@@ -2,9 +2,14 @@
 
 [![CI](https://github.com/guilherme-lacerda-tech/flask-operations-dashboard-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/guilherme-lacerda-tech/flask-operations-dashboard-lab/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Release](https://img.shields.io/github/v/release/guilherme-lacerda-tech/flask-operations-dashboard-lab)](https://github.com/guilherme-lacerda-tech/flask-operations-dashboard-lab/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A compact Flask dashboard for synthetic support operations. It combines a SQLite-backed incident repository, JSON endpoints, state transitions, SLA calculations and a usable browser UI with no external services.
+
+## Screenshot
+
+![Dashboard screenshot](docs/assets/dashboard-screenshot.png)
 
 ## What It Demonstrates
 
@@ -48,6 +53,12 @@ Transition payload:
 }
 ```
 
+More request/response examples are in [docs/api-examples.md](docs/api-examples.md).
+
+## Architecture
+
+See [docs/architecture.md](docs/architecture.md) and [docs/adr/0001-flask-sqlite-local-dashboard.md](docs/adr/0001-flask-sqlite-local-dashboard.md).
+
 ## Validation
 
 ```bash
@@ -61,3 +72,6 @@ The coverage gate is set to 86%.
 
 This project uses fictional queues, assets and incidents. It does not include real tickets, customers, devices, private URLs, credentials, logs or production screenshots.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
