@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flask-operations-dashboard-lab"
-version = "0.1.0"
+version = "0.1.1"
 description = "Synthetic Flask operations dashboard with SQLite-backed incidents, SLA signals and actionable JSON endpoints."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -50,4 +50,3 @@ source = ["flask_operations_dashboard_lab"]
 show_missing = true
 skip_covered = true
 fail_under = 86
-
