@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operations Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  </head>
+  <body>
+    <main class="ops-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Synthetic Support Operations</p>
+          <h1>Operations Dashboard</h1>
+        </div>
+        <button class="primary-action" id="ingestDemoButton" type="button">Ingest Demo Event</button>
+      </header>
+
+      <section class="metrics" id="metrics" aria-label="Operational metrics"></section>
+
+      <section class="dashboard-grid">
+        <div class="panel workload-panel">
+          <div class="panel-heading">
+            <h2>Queue Workload</h2>
+            <span id="automationRate" class="panel-meta"></span>
+          </div>
+          <div id="queueBars" class="queue-bars"></div>
+        </div>
+
+        <div class="panel trend-panel">
+          <div class="panel-heading">
+            <h2>SLA Trend</h2>
+            <span class="panel-meta">Last 8 intervals</span>
+          </div>
+          <div id="trendChart" class="trend-chart" aria-label="SLA trend chart"></div>
+        </div>
+      </section>
+
+      <section class="panel incident-panel">
+        <div class="panel-heading table-heading">
+          <h2>Incident Queue</h2>
+          <div class="segmented" role="group" aria-label="Incident status filter">
+            <button type="button" class="is-active" data-status-filter="active">Active</button>
+            <button type="button" data-status-filter="open">Open</button>
+            <button type="button" data-status-filter="acknowledged">Ack</button>
+            <button type="button" data-status-filter="escalated">Escalated</button>
+            <button type="button" data-status-filter="resolved">Resolved</button>
+            <button type="button" data-status-filter="all">All</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Queue</th>
+                <th>Asset</th>
+                <th>Severity</th>
+                <th>Age</th>
+                <th>SLA</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="incidentRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+  </body>
+</html>
+

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask-operations-dashboard-lab"
+version = "0.1.0"
+description = "Synthetic Flask operations dashboard with SQLite-backed incidents, SLA signals and actionable JSON endpoints."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Guilherme Lacerda" }]
+dependencies = [
+  "flask>=3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+flask-ops-dashboard-demo = "flask_operations_dashboard_lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flask_operations_dashboard_lab = ["templates/*.html", "static/*.css", "static/*.js"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "B"]
+ignore = ["B008", "E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.coverage.run]
+branch = true
+source = ["flask_operations_dashboard_lab"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 86
+
