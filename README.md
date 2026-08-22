@@ -16,6 +16,7 @@ A compact Flask dashboard for synthetic support operations. It combines a SQLite
 - Flask application factory with testable routes.
 - SQLite repository with deterministic synthetic seed data.
 - SLA breach calculations and queue summaries.
+- Operational KPIs for queue backlog, oldest pending incident, last failures, recovery status and temporal history.
 - JSON APIs for dashboard state and incident transitions.
 - Browser UI with KPI tiles, queue workload bars, SLA trend and incident table.
 - CI with Ruff and pytest coverage gate.

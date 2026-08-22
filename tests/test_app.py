@@ -21,6 +21,8 @@ def test_health_and_summary_api(tmp_path) -> None:
 
     assert health == {"incidents": 12, "status": "ok"}
     assert summary["open_total"] == 10
+    assert summary["queue_backlog"] == 10
+    assert summary["last_failures"]
 
 
 def test_incident_api_filter_and_transition(tmp_path) -> None:

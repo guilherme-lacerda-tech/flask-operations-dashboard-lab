@@ -181,8 +181,43 @@ class OperationsRepository:
             state: sum(1 for incident in all_incidents if incident["status"] == state)
             for state in sorted(VALID_STATES)
         }
+        oldest_pending_minutes = max(
+            (incident["age_minutes"] for incident in active_incidents),
+            default=0,
+        )
+        last_failures = [
+            {
+                "incident_key": incident["incident_key"],
+                "queue": incident["queue"],
+                "severity": incident["severity"],
+                "sla_state": incident["sla_state"],
+                "age_minutes": incident["age_minutes"],
+            }
+            for incident in sorted(
+                active_incidents,
+                key=lambda item: (item["sla_state"] != "breached", -item["severity"], item["created_at"]),
+            )[:3]
+        ]
+        temporal_history = [
+            {
+                **dict(row),
+                "net_change": row["opened"] - row["resolved"],
+            }
+            for row in trend
+        ]
+        recovery_status = (
+            "attention_required"
+            if breached
+            else "recovering"
+            if status_counts.get("resolved", 0)
+            else "stable"
+        )
         return {
             "open_total": len(active_incidents),
+            "queue_backlog": len(active_incidents),
+            "oldest_pending_minutes": oldest_pending_minutes,
+            "recovery_status": recovery_status,
+            "last_failures": last_failures,
             "breached_total": len(breached),
             "average_age_minutes": avg_age,
             "automation_success_rate": round(
@@ -201,6 +236,7 @@ class OperationsRepository:
                 for row in queues
             ],
             "sla_trend": [dict(row) for row in trend],
+            "temporal_history": temporal_history,
         }
 
     def transition_incident(self, incident_id: int, status: str) -> dict:

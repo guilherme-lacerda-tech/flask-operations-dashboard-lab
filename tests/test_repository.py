@@ -13,8 +13,14 @@ def test_repository_seeds_summary(tmp_path) -> None:
     assert summary["open_total"] == 10
     assert summary["breached_total"] >= 3
     assert summary["status_counts"]["resolved"] == 2
+    assert summary["queue_backlog"] == summary["open_total"]
+    assert summary["oldest_pending_minutes"] >= 200
+    assert summary["recovery_status"] == "attention_required"
+    assert len(summary["last_failures"]) == 3
     assert len(summary["queues"]) == 4
     assert len(summary["sla_trend"]) == 8
+    assert len(summary["temporal_history"]) == 8
+    assert "net_change" in summary["temporal_history"][0]
 
 
 def test_repository_filters_and_transitions_incidents(tmp_path) -> None:
